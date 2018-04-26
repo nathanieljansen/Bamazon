@@ -57,10 +57,15 @@ function viewProducts(){
 }
 
 function viewLowInventory() {
-  connection.query("SELECT product_name, stock_quantity FROM products HAVING stock_quantity count(*) < 2", function (err, res) {
+  connection.query("SELECT * FROM products WHERE stock_quantity < 5", function (err, res) {
     if (err) throw err;
     let items = '';
-   console.log(res)
+    for (var i = 0; i < res.length; i++) {
+      items = '';
+      items += 'Product Name: ' + res[i].product_name + '  //  ';
+      items += 'Quantity: ' + res[i].stock_quantity + '\n';
+      console.log(items);
+    }
   })
 }
 
