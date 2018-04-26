@@ -27,7 +27,7 @@ function allProducts() {
   connection.query("SELECT * FROM products", function (err, res) {
     if (err) throw err;
     console.log("Current Products for Sale");
-    var items = '';
+    let items = '';
     for (var i = 0; i < res.length; i++) {
       items = '';
       items += 'Item ID: ' + res[i].item_id + '  //  ';
@@ -70,13 +70,14 @@ function purchase(choice){
       choiceID = choice.item_id
       choiceQty = choice.quantity
       itemStock = res[0].stock_quantity
+      itemName = res[0].product_name
       if (err) throw Error(err);
       if (itemStock > choiceQty){
         
        total = choice.quantity * res[0].price;
         stillBuy(total, choiceQty)
       }else {
-        console.log("Sorry we don't have that much of that shit")
+        console.log("Sorry we only have " + itemStock +" " + itemName)
 
         keepShopping();
       }
