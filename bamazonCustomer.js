@@ -66,7 +66,7 @@ function whichItem() {
 
 function purchase(choice){
   const query = connection.query(
-    `SELECT * FROM products WHERE item_id = ${choice.item_id}`, function(err, res, fields) {
+    `SELECT * FROM products WHERE item_id = ${choice.item_id}`, function(err, res) {
       choiceID = choice.item_id
       choiceQty = choice.quantity
       itemStock = res[0].stock_quantity
