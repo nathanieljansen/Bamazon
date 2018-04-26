@@ -1,0 +1,19 @@
+{
+  "name": "c",
+  "version": "1.0.0",
+  "description": "bamazon cli",
+  "main": "bamazonCustomer.js",
+  "dependencies": {
+    "inquirer": "^5.2.0",
+    "mysql": "^2.15.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node bamazonCustomer.js"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "nathaniel jansen",
+  "license": "MIT"
+}
