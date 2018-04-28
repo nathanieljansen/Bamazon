@@ -205,15 +205,6 @@ function doDatAdd(choice) {
       if (err) throw Error(err);
       total = choice.quantity 
       stillBuy(total, choiceQty);
-      // if (itemStock > choiceQty) {
-      //   total = choice.quantity 
-      //   stillBuy(total, choiceQty)
-      // } else {
-      //   console.log("Sorry we only have " + itemStock + " " + itemName)
-
-      //   keepShopping();
-      // }
-
     }
   )
 }
