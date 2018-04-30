@@ -152,7 +152,7 @@ function addProduct() {
         }
       );
     });
-  }
+}
 
 // Add Inventory
 
@@ -176,19 +176,19 @@ function addInventory() {
 
 function whichItem() {
   inquirer.prompt([{
-    type: 'input',
-    name: 'item_id',
-    message: "What's the ID of the item you'd like to add inventory to?",
-    validate: validateInput,
-    filter: Number
-  },
-  {
-    type: 'input',
-    name: 'quantity',
-    message: 'How many do you add?',
-    validate: validateInput,
-    filter: Number
-  }
+      type: 'input',
+      name: 'item_id',
+      message: "What's the ID of the item you'd like to add inventory to?",
+      validate: validateInput,
+      filter: Number
+    },
+    {
+      type: 'input',
+      name: 'quantity',
+      message: 'How many do you add?',
+      validate: validateInput,
+      filter: Number
+    }
   ]).then(function (choice) {
     doDatAdd(choice)
   })
@@ -196,14 +196,15 @@ function whichItem() {
 
 function doDatAdd(choice) {
   const query = connection.query(
-    `SELECT * FROM products WHERE item_id = ${choice.item_id}`, function (err, res) {
+    `SELECT * FROM products WHERE item_id = ${choice.item_id}`,
+    function (err, res) {
       choiceQty = choice.quantity
       itemStock = res[0].stock_quantity
-    
+
       choiceID = choice.item_id
       itemName = res[0].product_name
       if (err) throw Error(err);
-      total = choice.quantity 
+      total = choice.quantity
       stillBuy(total, choiceQty);
     }
   )
@@ -219,19 +220,21 @@ function stillBuy(total) {
     switch (res.decision) {
       case "Yes":
         console.log("Nice!!")
-        connection.query("UPDATE products SET ? WHERE ?",
-          [
-            {
-              stock_quantity: (itemStock + choiceQty)
-            },
-            {
-              item_id: (choiceID)
-            }
-          ])
-        return setTimeout(function () { start() }, 3000);
+        connection.query("UPDATE products SET ? WHERE ?", [{
+            stock_quantity: (itemStock + choiceQty)
+          },
+          {
+            item_id: (choiceID)
+          }
+        ])
+        return setTimeout(function () {
+          start()
+        }, 3000);
       case "No":
         console.log("Returning to Manager Portal");
-        return setTimeout(function () { start() }, 3000);
+        return setTimeout(function () {
+          start()
+        }, 3000);
     }
   })
 }
